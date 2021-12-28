@@ -1,0 +1,25 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Main</title>
+  <script>
+    var popup;
+    function openEditor (){
+        popup = window.open('./editor.html', 'mywindow1', 'width=1000, height=900');
+		popup.postMessage("open", '*');
+    }
+    window.addEventListener("message", receiveMessage, false);
+    function receiveMessage(event){
+        console.log(event.data);
+	    document.getElementById('viewText').innerHTML = JSON.stringify(event.data);
+    }
+  </script>
+</head>
+
+<body>
+  <button type="button" onclick="openEditor()">エディタを開く</button>
+  <div>
+      <a id='viewText'>送られた情報をここに表示</a>
+  </div>
+</body>
+</html>
